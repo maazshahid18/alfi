@@ -75,32 +75,29 @@ export default function Animations() {
         ease: "power4.out",
       })
       .to(
-        ".hero-content > .reveal-up",
+        ".hero-panel .reveal-up",
         { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" },
         "-=0.6"
-      )
-      .to(
-        ".hero-stat.reveal-up",
-        { y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: "power3.out" },
-        "-=0.4"
       );
 
-    gsap.to(".hero-bg-img", {
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-      y: "10%",
-      scale: 1,
-      ease: "none",
+    const heroMm = gsap.matchMedia();
+    heroMm.add("(min-width: 1025px)", () => {
+      gsap.to(".hero-visual-img", {
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+        y: "8%",
+        ease: "none",
+      });
     });
 
     document.querySelectorAll<HTMLElement>("[data-count]").forEach((counter) => {
       const target = parseInt(counter.dataset.count || "0", 10);
       ScrollTrigger.create({
-        trigger: counter.closest(".hero-stats"),
+        trigger: counter.closest(".hero-panel-stats"),
         start: "top 80%",
         once: true,
         onEnter: () => {
@@ -185,6 +182,7 @@ export default function Animations() {
 
     return () => {
       window.removeEventListener("resize", onResize);
+      heroMm.revert();
       projectsMm?.revert();
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
