@@ -13,6 +13,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import Animations from "@/components/Animations";
+import LayoutFix from "@/components/LayoutFix";
 
 export default function Home() {
   return (
@@ -33,6 +34,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <LayoutFix />
       <SmoothScroll />
       <Animations />
     </>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans, Syne } from "next/font/google";
 import "./globals.css";
 
@@ -21,6 +21,13 @@ const display = Cormorant_Garamond({
   variable: "--font-display",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0F0D0B",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(

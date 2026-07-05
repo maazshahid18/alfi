@@ -6,17 +6,31 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+function isMobile() {
+  return window.matchMedia("(max-width: 1024px)").matches;
+}
+
+function showAllAnimated() {
+  document
+    .querySelectorAll(".reveal-up, .reveal-scale, .service-card")
+    .forEach((el) => {
+      const node = el as HTMLElement;
+      node.style.opacity = "1";
+      node.style.transform = "none";
+    });
+}
+
 export default function Animations() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    if (prefersReducedMotion) {
-      document.querySelectorAll(".reveal-up, .reveal-scale, .service-card").forEach((el) => {
-        const node = el as HTMLElement;
-        node.style.opacity = "1";
-        node.style.transform = "none";
+    if (prefersReducedMotion || isMobile()) {
+      showAllAnimated();
+      gsap.set(".hero-title .line span", { y: 0 });
+      document.querySelectorAll<HTMLElement>("[data-count]").forEach((counter) => {
+        counter.textContent = counter.dataset.count || "0";
       });
       return;
     }
@@ -78,7 +92,7 @@ export default function Animations() {
         end: "bottom top",
         scrub: true,
       },
-      y: "15%",
+      y: "10%",
       scale: 1,
       ease: "none",
     });
@@ -109,36 +123,41 @@ export default function Animations() {
     const projectsTrack = document.getElementById("projects-track");
     const progressBar = document.getElementById("projects-progress");
 
-    if (projectsTrack && projectsSection && window.innerWidth > 768) {
-      const getScrollAmount = () => {
-        const trackWidth = projectsTrack.scrollWidth;
-        return -(trackWidth - window.innerWidth + 80);
-      };
+    let projectsMm: ReturnType<typeof gsap.matchMedia> | null = null;
 
-      gsap.to(projectsTrack, {
-        x: getScrollAmount,
-        ease: "none",
-        scrollTrigger: {
-          trigger: projectsSection,
-          start: "top 15%",
-          end: () => `+=${Math.abs(getScrollAmount())}`,
-          pin: true,
-          scrub: 1,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-          onUpdate(self) {
-            if (progressBar) {
-              const pct = self.progress * 100;
-              let style = document.getElementById("progress-dynamic");
-              if (!style) {
-                style = document.createElement("style");
-                style.id = "progress-dynamic";
-                document.head.appendChild(style);
+    if (projectsTrack && projectsSection) {
+      projectsMm = gsap.matchMedia();
+      projectsMm.add("(min-width: 1025px)", () => {
+        const getScrollAmount = () => {
+          const trackWidth = projectsTrack.scrollWidth;
+          return -(trackWidth - window.innerWidth + 80);
+        };
+
+        gsap.to(projectsTrack, {
+          x: getScrollAmount,
+          ease: "none",
+          scrollTrigger: {
+            trigger: projectsSection,
+            start: "top 15%",
+            end: () => `+=${Math.abs(getScrollAmount())}`,
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+            anticipatePin: 1,
+            onUpdate(self) {
+              if (progressBar) {
+                const pct = self.progress * 100;
+                let style = document.getElementById("progress-dynamic");
+                if (!style) {
+                  style = document.createElement("style");
+                  style.id = "progress-dynamic";
+                  document.head.appendChild(style);
+                }
+                style.textContent = `.projects-progress-bar::after { width: ${pct}% !important; }`;
               }
-              style.textContent = `.projects-progress-bar::after { width: ${pct}% !important; }`;
-            }
+            },
           },
-        },
+        });
       });
     }
 
@@ -166,6 +185,7 @@ export default function Animations() {
 
     return () => {
       window.removeEventListener("resize", onResize);
+      projectsMm?.revert();
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
