@@ -309,6 +309,7 @@ ul { list-style: none; }
   width: 100%;
   height: 100%;
   min-height: 100%;
+  overflow: hidden;
   z-index: 0;
 }
 
@@ -323,13 +324,13 @@ ul { list-style: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: center 72%;
 }
 
 @media (min-width: 1025px) {
   .hero-bg-img {
-    object-position: 60% center;
-    transform: scale(1.05);
+    object-position: center 68%;
+    transform: scale(1.04);
     will-change: transform;
   }
 }
@@ -1267,9 +1268,22 @@ ul { list-style: none; }
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .hero {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  .hero-bg > span {
+    top: 0 !important;
+    bottom: 0 !important;
+    height: 100% !important;
+    min-height: 100% !important;
+  }
+
   .hero-bg-img {
-    object-position: center 20%;
-    transform: none !important;
+    object-position: center 78%;
+    transform: scale(1.1) !important;
+    transform-origin: center 78% !important;
   }
 
   .hero-overlay {
@@ -1277,8 +1291,8 @@ ul { list-style: none; }
       linear-gradient(
         to top,
         rgba(15, 13, 11, 0.95) 0%,
-        rgba(15, 13, 11, 0.65) 38%,
-        transparent 72%
+        rgba(15, 13, 11, 0.6) 36%,
+        transparent 62%
       );
   }
 
@@ -1426,9 +1440,9 @@ ul { list-style: none; }
 
   /* Hero */
   .hero {
-    height: 100svh;
-    min-height: 100svh;
-    max-height: 100svh;
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: none;
   }
 
   .hero-inner {
@@ -1449,27 +1463,36 @@ ul { list-style: none; }
     min-height: 100%;
   }
 
-  .hero-bg-img {
-    object-position: center 15%;
-    min-height: 100%;
-    min-width: 100%;
-    transform: none !important;
+  .hero-bg > span {
+    height: 100% !important;
+    min-height: 100% !important;
+  }
+
+  .hero-bg-img,
+  .hero-bg img {
+    object-position: center bottom !important;
+    object-fit: cover !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    transform: scale(1.22) !important;
+    transform-origin: center bottom !important;
     will-change: auto !important;
   }
 
-  .hero-bg > span,
-  .hero-bg img {
-    transform: none !important;
-    min-height: 100% !important;
-    height: 100% !important;
+  .hero-overlay {
+    background:
+      linear-gradient(
+        to top,
+        rgba(15, 13, 11, 0.94) 0%,
+        rgba(15, 13, 11, 0.55) 34%,
+        transparent 56%
+      ) !important;
   }
 
   .header:not(.scrolled) {
-    background: linear-gradient(
-      to bottom,
-      rgba(15, 13, 11, 0.45) 0%,
-      transparent 100%
-    );
+    background: transparent !important;
   }
 
   .hero-badge {

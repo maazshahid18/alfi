@@ -7,11 +7,11 @@ export default function Hero() {
     <section className="hero" id="hero">
       <div className="hero-bg" aria-hidden="true">
         <Image
-          src={site.heroImage}
+          src="/images/hero.jpeg"
           alt=""
           fill
           priority
-          quality={92}
+          quality={100}
           className="hero-bg-img"
           sizes="100vw"
         />
