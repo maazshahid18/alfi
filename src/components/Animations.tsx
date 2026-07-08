@@ -75,21 +75,21 @@ export default function Animations() {
         ease: "power4.out",
       })
       .to(
-        ".hero-panel .reveal-up",
+        ".hero-content .reveal-up",
         { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" },
         "-=0.6"
       );
 
     const heroMm = gsap.matchMedia();
     heroMm.add("(min-width: 1025px)", () => {
-      gsap.to(".hero-visual-img", {
+      gsap.to(".hero-bg-img", {
         scrollTrigger: {
           trigger: ".hero",
           start: "top top",
           end: "bottom top",
           scrub: true,
         },
-        y: "8%",
+        y: "10%",
         ease: "none",
       });
     });
@@ -97,7 +97,7 @@ export default function Animations() {
     document.querySelectorAll<HTMLElement>("[data-count]").forEach((counter) => {
       const target = parseInt(counter.dataset.count || "0", 10);
       ScrollTrigger.create({
-        trigger: counter.closest(".hero-panel-stats"),
+        trigger: counter.closest(".hero-stats"),
         start: "top 80%",
         once: true,
         onEnter: () => {
