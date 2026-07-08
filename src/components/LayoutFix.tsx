@@ -10,11 +10,8 @@ export default function LayoutFix() {
       const isNarrow = window.matchMedia("(max-width: 1024px)").matches;
       const track = document.getElementById("projects-track");
 
-      if (isNarrow) {
-        if (track) {
-          gsap.set(track, { x: 0, clearProps: "transform" });
-        }
-        ScrollTrigger.getAll().forEach((st) => st.kill(true));
+      if (isNarrow && track) {
+        gsap.set(track, { x: 0, clearProps: "transform" });
       }
 
       document.documentElement.style.overflowX = "hidden";

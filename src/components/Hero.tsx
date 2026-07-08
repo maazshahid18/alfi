@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import { site, stats } from "@/lib/data";
+import { site } from "@/lib/data";
 
 export default function Hero() {
   return (
@@ -19,47 +18,29 @@ export default function Hero() {
       </div>
 
       <div className="hero-inner container">
-        <div className="hero-content">
-          <div className="hero-badge reveal-up">
-            <span className="hero-badge-dot" />
-            Est. {site.established} · {site.location}
-          </div>
-
-          <h1 className="hero-title">
-            <span className="line">
-              <span>Building</span>
-            </span>
-            <span className="line">
-              <span className="hero-title-accent">Trust.</span>
-            </span>
-            <span className="line">
-              <span>Crafting Classics.</span>
-            </span>
-          </h1>
-
-          <div className="hero-actions reveal-up">
-            <Link href="#gallery" className="btn btn-primary">
-              View Our Work
-            </Link>
-            <Link href="#contact" className="btn btn-ghost">
-              Get in Touch
-            </Link>
-          </div>
-
-          <div className="hero-stats reveal-up">
-            {stats.map((stat) => (
-              <div className="hero-stat" key={stat.label}>
-                <span className="hero-stat-num" data-count={stat.value}>
-                  0
-                </span>
-                {stat.suffix && (
-                  <span className="hero-stat-suffix">{stat.suffix}</span>
-                )}
-                <span className="hero-stat-label">{stat.label}</span>
-              </div>
-            ))}
+        <div className="hero-brand">
+          <div className="hero-logo-anchor" id="hero-logo-anchor">
+            <div className="hero-logo-spacer" aria-hidden="true" />
           </div>
         </div>
+
+        <div className="hero-content">
+          <h1 className="hero-title">
+            <span className="line">
+              <span>WE BUILD MORE THAN STRUCTURES,</span>
+            </span>
+            <span className="line">
+              <span>WE BUILD </span>
+              <span className="hero-title-accent">TRUST.</span>
+            </span>
+          </h1>
+        </div>
+
+        <p className="hero-sub hero-sub--banner">
+          {site.descriptionLines.map((line) => (
+            <span key={line}>{line}</span>
+          ))}
+        </p>
       </div>
     </section>
   );

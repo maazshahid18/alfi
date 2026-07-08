@@ -1,14 +1,9 @@
+import BrandLogo from "@/components/BrandLogo";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Marquee from "@/components/Marquee";
-import About from "@/components/About";
+import HeroCta from "@/components/HeroCta";
 import Services from "@/components/Services";
-import Capacity from "@/components/Capacity";
-import Gallery from "@/components/Gallery";
-import BageechaBanner from "@/components/BageechaBanner";
-
-import Categories from "@/components/Categories";
-import Clients from "@/components/Clients";
+import WhyAlfi from "@/components/WhyAlfi";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -19,17 +14,13 @@ export default function Home() {
   return (
     <>
       <div className="scroll-progress" aria-hidden="true" />
+      <BrandLogo />
       <Header />
       <main>
         <Hero />
-        <Marquee />
-        <About />
+        <HeroCta />
         <Services />
-        <Capacity />
-        <Gallery />
-        <BageechaBanner />
-        <Categories />
-        <Clients />
+        <WhyAlfi />
         <Contact />
       </main>
       <Footer />

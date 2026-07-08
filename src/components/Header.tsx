@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { externalLinks, navLinks, site } from "@/lib/data";
+import { navLinks, site } from "@/lib/data";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -23,16 +23,19 @@ export default function Header() {
     <header className="header" id="header">
       <nav className="nav container">
         <Link href="#hero" className="nav-logo" onClick={close}>
-          <Image
-            src="/images/logo.jpeg"
-            alt={site.name}
-            width={48}
-            height={48}
-            priority
-          />
+          <span className="nav-logo-slot" id="nav-logo-slot" aria-hidden="true">
+            <Image
+              src="/images/logo.png"
+              alt=""
+              width={48}
+              height={48}
+              className="nav-logo-img"
+              priority
+            />
+          </span>
           <span className="nav-logo-text">
-            <strong>{site.shortName}</strong>
-            <small>Builders &amp; Developers</small>
+            <strong>ALFI</strong>
+            <span className="nav-logo-name">BUILDER &amp; DEVELOPERS</span>
           </span>
         </Link>
 
@@ -46,19 +49,6 @@ export default function Header() {
                 onClick={close}
               >
                 {link.label}
-              </Link>
-            </li>
-          ))}
-          {externalLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="nav-external"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={close}
-              >
-                {link.label} ↗
               </Link>
             </li>
           ))}

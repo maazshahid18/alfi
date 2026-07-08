@@ -33,25 +33,25 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://alfibuilders.com"
   ),
-  title: "Alfi Builders & Developers — Known for Quality & Commitment",
+  title: "ALFI Builders & Developers — Known for Quality & Commitment",
   description:
-    "Known for quality and commitment since 2009. Residential, commercial, institutional, and infrastructure across India.",
+    "ALFI Builders & Developers delivers high-quality residential, commercial, and interior solutions with honesty, transparency and timely delivery.",
   keywords: [
     "construction company Gaya",
-    "Alfi Builders",
-    "civil engineering",
-    "building construction",
-    "power substation",
+    "ALFI Builders",
+    "residential construction",
+    "commercial construction",
+    "interior solutions",
     "project management",
   ],
   authors: [{ name: "Alfi Builders & Developers" }],
   openGraph: {
-    title: "Alfi Builders & Developers",
+    title: "ALFI Builders & Developers",
     description:
-      "Known for quality & commitment since 2009.",
+      "We build more than structures, we build trust.",
     type: "website",
     locale: "en_IN",
-    images: [{ url: "/images/logo.jpeg", width: 512, height: 512, alt: "Alfi Builders logo" }],
+    images: [{ url: "/images/logo.png", width: 512, height: 512, alt: "Alfi Builders logo" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -59,8 +59,8 @@ export const metadata: Metadata = {
     description: "Known for quality & commitment.",
   },
   icons: {
-    icon: "/images/logo.jpeg",
-    apple: "/images/logo.jpeg",
+    icon: "/images/logo.png",
+    apple: "/images/logo.png",
   },
 };
 

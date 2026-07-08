@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="container footer-inner">
         <div className="footer-brand">
           <Image
-            src="/images/logo.jpeg"
+            src="/images/logo.png"
             alt={site.name}
             width={56}
             height={56}
@@ -28,9 +28,6 @@ export default function Footer() {
               {link.label}
             </Link>
           ))}
-          <Link href={site.bageecha.url} target="_blank" rel="noopener noreferrer">
-            Bageecha
-          </Link>
           <Link href={site.url} target="_blank" rel="noopener noreferrer">
             alfibuilders.com
           </Link>
@@ -39,7 +36,7 @@ export default function Footer() {
         <p className="footer-copy">
           &copy; {site.established}–{year} {site.name}. All rights reserved.
         </p>
-        <p className="footer-tagline">Safety First · Progress Must</p>
+        <p className="footer-tagline">Quality We Build · Trust We Earn</p>
       </div>
     </footer>
   );

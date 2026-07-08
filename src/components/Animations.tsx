@@ -29,6 +29,7 @@ export default function Animations() {
     if (prefersReducedMotion || isMobile()) {
       showAllAnimated();
       gsap.set(".hero-title .line span", { y: 0 });
+      gsap.set(".hero-sub--banner", { y: 0, opacity: 1 });
       document.querySelectorAll<HTMLElement>("[data-count]").forEach((counter) => {
         counter.textContent = counter.dataset.count || "0";
       });
@@ -36,7 +37,7 @@ export default function Animations() {
     }
 
     gsap.utils.toArray<HTMLElement>(".reveal-up").forEach((el) => {
-      if (el.closest(".hero") || el.closest(".services-grid")) return;
+      if (el.closest(".hero") || el.closest(".services-scroll-pin")) return;
       gsap.to(el, {
         scrollTrigger: {
           trigger: el,
@@ -65,6 +66,7 @@ export default function Animations() {
     });
 
     gsap.set(".hero-title .line span", { y: "110%" });
+    gsap.set(".hero-sub--banner", { y: 28, opacity: 0 });
 
     const heroTl = gsap.timeline({ delay: 0.3 });
     heroTl
@@ -75,9 +77,14 @@ export default function Animations() {
         ease: "power4.out",
       })
       .to(
-        ".hero-content .reveal-up",
+        ".hero-content .reveal-up, .hero-title",
         { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" },
         "-=0.6"
+      )
+      .to(
+        ".hero-sub--banner",
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+        "-=0.45"
       );
 
     const heroMm = gsap.matchMedia();
@@ -155,24 +162,6 @@ export default function Animations() {
             },
           },
         });
-      });
-    }
-
-    const serviceCards = gsap.utils.toArray<HTMLElement>(".service-card");
-    if (serviceCards.length) {
-      gsap.set(serviceCards, { opacity: 0, y: 48 });
-      gsap.to(serviceCards, {
-        scrollTrigger: {
-          trigger: ".services-grid",
-          start: "top 80%",
-          once: true,
-        },
-        opacity: 1,
-        y: 0,
-        duration: 0.75,
-        stagger: 0.12,
-        ease: "power3.out",
-        clearProps: "transform",
       });
     }
 
