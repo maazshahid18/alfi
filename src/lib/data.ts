@@ -4,7 +4,7 @@ export const site = {
   tagline: "Known for quality & commitment",
   url: "https://alfibuilders.com",
   description:
-    "Engineering construction and project management since 2009. Residential, commercial, institutional, and infrastructure projects across India.",
+    "Known for quality and commitment since 2009. Residential, commercial, institutional, and infrastructure across India.",
   established: 2009,
   location: "Gaya, India",
   email: "sajid.alfi@gmail.com",
@@ -29,7 +29,6 @@ export const navLinks = [
   { href: "#about", label: "About" },
   { href: "#services", label: "Services" },
   { href: "#gallery", label: "Gallery" },
-  { href: "#projects", label: "Projects" },
   { href: "#clients", label: "Clients" },
   { href: "#contact", label: "Contact" },
 ] as const;
@@ -157,7 +156,7 @@ export const marqueeItems = [
 
 export const stats = [
   { value: 15, suffix: "+", label: "Years Experience" },
-  { value: 50, suffix: "+", label: "Projects Delivered" },
+  { value: 50, suffix: "+", label: "Works Delivered" },
   { value: 9, suffix: "", label: "Major Clients" },
 ] as const;
 

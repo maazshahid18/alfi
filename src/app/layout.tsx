@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   ),
   title: "Alfi Builders & Developers — Known for Quality & Commitment",
   description:
-    "Engineering construction and project management since 2009. Residential, commercial, institutional, and infrastructure projects across India.",
+    "Known for quality and commitment since 2009. Residential, commercial, institutional, and infrastructure across India.",
   keywords: [
     "construction company Gaya",
     "Alfi Builders",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Alfi Builders & Developers",
     description:
-      "Known for quality & commitment. Engineering construction since 2009.",
+      "Known for quality & commitment since 2009.",
     type: "website",
     locale: "en_IN",
     images: [{ url: "/images/logo.jpeg", width: 512, height: 512, alt: "Alfi Builders logo" }],

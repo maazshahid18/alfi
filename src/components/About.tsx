@@ -48,8 +48,8 @@ export default function About() {
 
           <div className="about-content">
             <p className="about-lead reveal-up">
-              Alfi Builder is an incorporated, locally owned company offering
-              engineering construction and construction project management across
+              Alfi Builder is an incorporated, locally owned company building
+              residential, commercial, and institutional developments across
               India.
             </p>
             <p className="reveal-up">

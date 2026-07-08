@@ -37,10 +37,8 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="hero-sub reveal-up">{site.description}</p>
-
           <div className="hero-actions reveal-up">
-            <Link href="#projects" className="btn btn-primary">
+            <Link href="#gallery" className="btn btn-primary">
               View Our Work
             </Link>
             <Link href="#contact" className="btn btn-ghost">

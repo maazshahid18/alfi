@@ -6,7 +6,7 @@ import Services from "@/components/Services";
 import Capacity from "@/components/Capacity";
 import Gallery from "@/components/Gallery";
 import BageechaBanner from "@/components/BageechaBanner";
-import Projects from "@/components/Projects";
+
 import Categories from "@/components/Categories";
 import Clients from "@/components/Clients";
 import Contact from "@/components/Contact";
@@ -27,7 +27,6 @@ export default function Home() {
         <Services />
         <Capacity />
         <Gallery />
-        <Projects />
         <BageechaBanner />
         <Categories />
         <Clients />
