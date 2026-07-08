@@ -661,6 +661,14 @@ ul { list-style: none; }
   padding-top: clamp(1rem, 2vh, 1.5rem);
 }
 
+.services-desktop {
+  display: block;
+}
+
+.services-mobile {
+  display: none;
+}
+
 .services-scroll-wrap {
   position: relative;
 }
@@ -750,10 +758,6 @@ ul { list-style: none; }
   left: 0;
   color: var(--gold);
   font-weight: 700;
-}
-
-.services-slide-mobile-visual {
-  display: none;
 }
 
 .services-visual {
@@ -1688,45 +1692,55 @@ ul { list-style: none; }
   }
 
   /* Services */
-  .services-header .section-lead {
-    font-size: clamp(0.68rem, 2.8vw, 0.88rem);
-  }
-
-  .services-scroll-pin {
-    min-height: auto;
-    padding: 2rem 0 3rem;
-  }
-
-  .services-showcase {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  .services-visual {
+  .services-desktop {
     display: none;
   }
 
-  .services-copy {
-    min-height: auto;
-    display: grid;
-    gap: 3rem;
-  }
-
-  .services-slide {
-    position: relative;
-    inset: auto;
-    visibility: visible;
-    opacity: 1;
-    justify-content: flex-start;
-  }
-
-  .services-slide-mobile-visual {
+  .services-mobile {
     display: block;
+    padding: 2.5rem 0 3.5rem;
+  }
+
+  .services-mobile .services-header {
+    padding-inline: 0.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .services-mobile .section-title {
+    font-size: clamp(1.65rem, 7.5vw, 2.15rem);
+    text-wrap: balance;
+    max-width: 14ch;
+    margin-inline: auto;
+  }
+
+  .services-mobile .section-lead {
+    white-space: normal;
+    max-width: 34ch;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin-top: 0.85rem;
+  }
+
+  .services-mobile-list {
+    display: grid;
+    gap: 2.75rem;
+  }
+
+  .services-mobile-card {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .services-mobile-image {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 11;
-    margin-bottom: 1.25rem;
     overflow: hidden;
+  }
+
+  .services-mobile-card .services-slide-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.35rem;
   }
 
   /* Capacity */
@@ -1859,14 +1873,18 @@ ul { list-style: none; }
     padding: 3.5rem 0;
   }
 
-  .services-slide-title {
-    font-size: 1.35rem;
-    margin-bottom: 1rem;
+  .services-mobile .section-title {
+    font-size: clamp(1.5rem, 8.5vw, 1.85rem);
+    max-width: 12ch;
   }
 
-  .services-header .section-lead {
-    font-size: 0.62rem;
-    letter-spacing: -0.02em;
+  .services-mobile .section-lead {
+    font-size: 0.88rem;
+    max-width: none;
+  }
+
+  .services-mobile-card .services-slide-title {
+    font-size: 1.15rem;
   }
 
   .nav-logo-text strong {

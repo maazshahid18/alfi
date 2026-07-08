@@ -37,7 +37,13 @@ export default function Animations() {
     }
 
     gsap.utils.toArray<HTMLElement>(".reveal-up").forEach((el) => {
-      if (el.closest(".hero") || el.closest(".services-scroll-pin")) return;
+      if (
+        el.closest(".hero") ||
+        el.closest(".services-scroll-pin") ||
+        el.closest(".services-mobile")
+      ) {
+        return;
+      }
       gsap.to(el, {
         scrollTrigger: {
           trigger: el,

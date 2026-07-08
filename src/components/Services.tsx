@@ -8,6 +8,17 @@ import { services, servicesSection } from "@/lib/data";
 
 gsap.registerPlugin(ScrollTrigger);
 
+function ServicesHeader() {
+  return (
+    <header className="services-header section-header">
+      <h2 className="section-title">
+        Complete <em>Construction Solutions</em>
+      </h2>
+      <p className="section-lead">{servicesSection.subtitle}</p>
+    </header>
+  );
+}
+
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -15,10 +26,19 @@ export default function Services() {
     const section = sectionRef.current;
     if (!section) return;
 
+    const desktopRoot = section.querySelector<HTMLElement>(".services-desktop");
+    if (!desktopRoot) return;
+
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const textSlides = gsap.utils.toArray<HTMLElement>(".services-slide", section);
-    const imageSlides = gsap.utils.toArray<HTMLElement>(".services-image-slide", section);
-    const pinTarget = section.querySelector<HTMLElement>(".services-scroll-pin");
+    const textSlides = gsap.utils.toArray<HTMLElement>(
+      ".services-slide",
+      desktopRoot
+    );
+    const imageSlides = gsap.utils.toArray<HTMLElement>(
+      ".services-image-slide",
+      desktopRoot
+    );
+    const pinTarget = desktopRoot.querySelector<HTMLElement>(".services-scroll-pin");
 
     if (!textSlides.length || !imageSlides.length || !pinTarget) {
       return;
@@ -33,21 +53,25 @@ export default function Services() {
       });
     };
 
-    if (reduced) {
-      gsap.set([...textSlides, ...imageSlides], { clearProps: "all" });
-      [...textSlides, ...imageSlides].forEach((slide) => {
-        slide.style.opacity = "1";
-        slide.style.visibility = "visible";
-        slide.style.transform = "none";
-        slide.style.position = "relative";
-      });
-      setActiveSlide(0);
-      return;
-    }
-
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 769px)", () => {
+      if (reduced) {
+        gsap.set([...textSlides, ...imageSlides], { clearProps: "all" });
+        textSlides.forEach((slide) => {
+          slide.style.opacity = "1";
+          slide.style.visibility = "visible";
+          slide.style.transform = "none";
+        });
+        imageSlides.forEach((slide) => {
+          slide.style.opacity = "1";
+          slide.style.visibility = "visible";
+          slide.style.transform = "none";
+        });
+        setActiveSlide(0);
+        return;
+      }
+
       gsap.set(textSlides, { autoAlpha: 0, y: 40 });
       gsap.set(imageSlides, { autoAlpha: 0, scale: 1.05 });
       gsap.set(textSlides[0], { autoAlpha: 1, y: 0 });
@@ -114,23 +138,6 @@ export default function Services() {
       };
     });
 
-    mm.add("(max-width: 768px)", () => {
-      gsap.set([...textSlides, ...imageSlides], {
-        clearProps: "all",
-        autoAlpha: 1,
-        y: 0,
-        scale: 1,
-      });
-
-      return () => {
-        ScrollTrigger.getAll().forEach((trigger) => {
-          if (trigger.trigger && section.contains(trigger.trigger as Node)) {
-            trigger.kill();
-          }
-        });
-      };
-    });
-
     const onRefresh = () => ScrollTrigger.refresh();
     window.addEventListener("resize", onRefresh);
     window.addEventListener("load", onRefresh);
@@ -144,63 +151,77 @@ export default function Services() {
 
   return (
     <section className="services" id="services" ref={sectionRef}>
-      <div className="services-scroll-wrap">
-        <div className="services-scroll-pin">
-          <div className="container services-scroll-inner">
-            <header className="services-header section-header">
-              <h2 className="section-title">
-                Complete <em>Construction Solutions</em>
-              </h2>
-              <p className="section-lead">{servicesSection.subtitle}</p>
-            </header>
+      <div className="services-desktop">
+        <div className="services-scroll-wrap">
+          <div className="services-scroll-pin">
+            <div className="container services-scroll-inner">
+              <ServicesHeader />
 
-            <div className="services-showcase" aria-live="polite">
-              <div className="services-copy">
-                {services.map((item, index) => (
-                  <article
-                    className={`services-slide${index === 0 ? " is-first" : ""}`}
-                    key={item.title}
-                    aria-hidden={index !== 0}
-                  >
-                    <div className="services-slide-mobile-visual">
+              <div className="services-showcase" aria-live="polite">
+                <div className="services-copy">
+                  {services.map((item, index) => (
+                    <article
+                      className={`services-slide${index === 0 ? " is-first" : ""}`}
+                      key={item.title}
+                      aria-hidden={index !== 0}
+                    >
+                      <h3 className="services-slide-title">{item.title}</h3>
+                      <ul className="services-slide-list">
+                        {item.items.map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
+                      </ul>
+                    </article>
+                  ))}
+                </div>
+
+                <div className="services-visual">
+                  {services.map((item, index) => (
+                    <div
+                      className={`services-image-slide${index === 0 ? " is-first" : ""}`}
+                      key={item.title}
+                      aria-hidden={index !== 0}
+                    >
                       <Image
                         src={item.image}
                         alt={item.title}
                         fill
-                        sizes="100vw"
+                        sizes="50vw"
                         className="services-slide-img"
+                        priority={index === 0}
                       />
                     </div>
-                    <h3 className="services-slide-title">{item.title}</h3>
-                    <ul className="services-slide-list">
-                      {item.items.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
-                  </article>
-                ))}
-              </div>
-
-              <div className="services-visual">
-                {services.map((item, index) => (
-                  <div
-                    className={`services-image-slide${index === 0 ? " is-first" : ""}`}
-                    key={item.title}
-                    aria-hidden={index !== 0}
-                  >
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="services-slide-img"
-                      priority={index === 0}
-                    />
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="services-mobile container">
+        <ServicesHeader />
+
+        <div className="services-mobile-list">
+          {services.map((item) => (
+            <article className="services-mobile-card" key={item.title}>
+              <div className="services-mobile-image">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="100vw"
+                  className="services-slide-img"
+                />
+              </div>
+              <h3 className="services-slide-title">{item.title}</h3>
+              <ul className="services-slide-list">
+                {item.items.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </div>
     </section>
