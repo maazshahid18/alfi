@@ -25,6 +25,7 @@ export const site = {
   },
 } as const;
 
+//console
 export const navLinks = [
   { href: "#services", label: "Services" },
   { href: "#why-alfi", label: "Why ALFI" },
